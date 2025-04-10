@@ -47,11 +47,11 @@ def create():
     return render_template('create.html')
 
 @app.route('/delete')
-def create():
+def delete():
     return render_template('delete.html')
 
 @app.route('/edit')
-def create():
+def edit():
     return render_template('edit.html')
 
 if __name__ == '__main__':
