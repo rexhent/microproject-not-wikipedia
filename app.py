@@ -19,9 +19,11 @@ def home():
 def login():
     return render_template('login.html')
 
-@app.route('/view')
+@app.route('/view', methods=['POST'])
 def view():
-    return render_template('view.html')
+    content_id = request.form.get('content_id')
+    content = Content.query.get(content_id)
+    return render_template('view.html', content=content)
 
 @app.route('/register')
 def register():
