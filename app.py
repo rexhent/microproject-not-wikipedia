@@ -7,6 +7,8 @@ class AccessLevel(Enum):
     EDITOR = 2
     ADMIN = 3
 
+#new_user = User(name="Kai", password="1234", permission=AccessLevel.ADMIN)
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cms.db'
 db = SQLAlchemy(app)
@@ -42,7 +44,7 @@ def login():
 def register():
     return render_template('register.html')
 
-@app.route('/create')
+@app.route('/create', methods=['POST'])
 def create():
     return render_template('create.html')
 
