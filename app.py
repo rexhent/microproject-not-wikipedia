@@ -28,17 +28,17 @@ def home():
     contents = Content.query.all()
     return render_template('index.html', contents=contents)
 
-@app.route('/login')
-def login():
-    return render_template('login.html')
-
 @app.route('/view', methods=['POST'])
 def view():
     content_id = request.form.get('content_id')
     content = Content.query.get(content_id)
     return render_template('view.html', content=content)
 
-@app.route('/register')
+@app.route('/login', methods=['POST'])
+def login():
+    return render_template('login.html')
+
+@app.route('/register', methods=['POST'])
 def register():
     return render_template('register.html')
 
