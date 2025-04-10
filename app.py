@@ -12,7 +12,8 @@ class Content(db.Model):
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    contents = Content.query.all()
+    return render_template('index.html', contents=contents)
 
 @app.route('/login')
 def login():

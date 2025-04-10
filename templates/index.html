@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<lang ="eng">
-  <title>Not Wikipedia</title>
-  <head>
-    Not Wikipedia
-    <body>
-      <button>View</button>
-    </body>
-  </head>
-</lang>
+{% extends "layout.html" %} {% block content %}
+<html>
+  <head> </head>
+  <body>
+    <h1>Articles</h1>
+    <ul>
+      {% for content in contents %}
+      <li>
+        <form
+          action="{{ url_for('view') }}"
+          method="post"
+          style="display: inline"
+        >
+          <input type="hidden" name="content_id" value="{{ content.id }}" />
+          <button type="submit">{{ content.title }}</button>
+        </form>
+      </li>
+      {% endfor %}
+    </ul>
+    <a href="{{ url_for('edit') }}">edit Content</a>
+  </body>
+</html>
+{% endblock %}
+
