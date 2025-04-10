@@ -1,5 +1,11 @@
 from flask import Flask, render_template, request, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from enum import Enum
+
+class AccessLevel(Enum):
+    USER = 1
+    EDITOR = 2
+    ADMIN = 3
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///cms.db'
@@ -7,8 +13,15 @@ db = SQLAlchemy(app)
 
 class Content(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    title = db.Column(db.String(100), nullable=False)
+    title = db.Column(db.String, nullable=False)
     body = db.Column(db.Text, nullable=False)
+
+class Users(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String, nullable=False)
+    password = db.Column(db.String, nullable=False)
+    permission = db.Column(db.Enum(AccessLevel), nullable=False)
+
 
 @app.route('/')
 def home():
